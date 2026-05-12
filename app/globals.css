@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family:
+    "Inter", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui,
+    sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f7f7f4;
+}
+
+a {
+  text-decoration: none;
+}
