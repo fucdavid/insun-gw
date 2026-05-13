@@ -17,3 +17,18 @@ test.describe("homepage browser rendering", () => {
     expect(heroHeadingFontSize).toBeGreaterThan(40);
   });
 });
+
+test.describe("service detail browser rendering", () => {
+  test("renders a service detail page with crawlable sections and CSS", async ({ page }) => {
+    await page.goto("/services/user-operations");
+
+    await expect(page.getByRole("heading", { level: 1, name: "用户运营" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "服务内容" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "代表客户" })).toBeVisible();
+    await expect(page.getByText("坦克汽车")).toBeVisible();
+    await expect(page.getByRole("main").getByRole("link", { name: "咨询合作" })).toBeVisible();
+
+    const pageBackground = await page.locator("body").evaluate((element) => getComputedStyle(element).backgroundColor);
+    expect(pageBackground).toBe("rgb(247, 247, 244)");
+  });
+});

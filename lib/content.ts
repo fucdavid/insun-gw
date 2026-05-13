@@ -6,9 +6,19 @@ export type NavigationItem = {
 };
 
 export type HomepageService = {
+  slug: string;
   title: string;
   summary: string;
   keywords: string[];
+  overview?: string;
+  content?: string[];
+  platforms?: string[];
+  targetCustomers?: string[];
+  modules?: Array<{
+    name: string;
+    description: string;
+  }>;
+  representativeClients?: string[];
 };
 
 export function getPrimaryNavigation(): NavigationItem[] {
@@ -17,4 +27,8 @@ export function getPrimaryNavigation(): NavigationItem[] {
 
 export function getHomepageServices(): HomepageService[] {
   return siteContent.homepageServices;
+}
+
+export function getServiceBySlug(slug: string): HomepageService | undefined {
+  return siteContent.homepageServices.find((service) => service.slug === slug);
 }

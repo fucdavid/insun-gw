@@ -44,7 +44,11 @@ export default function HomePage() {
           <div className="grid gap-10 md:grid-cols-2">
             {services.map((service) => (
               <article key={service.title} className="border-t border-black/15 pt-7">
-                <h2 className="text-3xl font-semibold tracking-normal text-[#1c1c1a]">{service.title}</h2>
+                <h2 className="text-3xl font-semibold tracking-normal text-[#1c1c1a]">
+                  <Link href={`/services/${service.slug}`} className="transition hover:text-[#0f5b4f]">
+                    {service.title}
+                  </Link>
+                </h2>
                 <p className="mt-4 text-base leading-7 text-[#55564f]">{service.summary}</p>
                 <p className="mt-3 text-sm leading-7 text-[#2f302c]">{service.keywords.join(" · ")}</p>
               </article>

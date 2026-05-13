@@ -37,6 +37,26 @@ describe("homepage", () => {
     expect(screen.queryByText("吉利汽车")).not.toBeInTheDocument();
   });
 
+  it("links each homepage service summary to its detail page", () => {
+    render(<HomePage />);
+
+    expect(screen.getByRole("link", { name: /用户运营/ })).toHaveAttribute("href", "/services/user-operations");
+    expect(screen.getByRole("link", { name: /口碑营销/ })).toHaveAttribute("href", "/services/word-of-mouth-marketing");
+    expect(screen.getByRole("link", { name: /社会化媒体营销/ })).toHaveAttribute("href", "/services/social-media-marketing");
+    expect(screen.getByRole("link", { name: /直播\/短视频营销/ })).toHaveAttribute(
+      "href",
+      "/services/live-short-video-marketing"
+    );
+    expect(screen.getByRole("link", { name: /互动公关/ })).toHaveAttribute(
+      "href",
+      "/services/interactive-public-relations"
+    );
+    expect(screen.getByRole("link", { name: /数字渠道建设/ })).toHaveAttribute(
+      "href",
+      "/services/digital-channel-construction"
+    );
+  });
+
   it("positions automotive as the advantage industry without excluding other target industries", () => {
     render(<HomePage />);
 
