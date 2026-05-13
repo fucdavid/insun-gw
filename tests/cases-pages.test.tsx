@@ -18,8 +18,8 @@ describe("service cases pages", () => {
     expect(screen.getAllByRole("article")).toHaveLength(3);
   });
 
-  it("renders a business case detail story with result and consultation CTA", () => {
-    render(<CaseDetailPage params={{ slug: "tank-user-community-growth" }} />);
+  it("renders a business case detail story with result and consultation CTA", async () => {
+    render(await CaseDetailPage({ params: Promise.resolve({ slug: "tank-user-community-growth" }) }));
 
     expect(screen.getByRole("heading", { level: 1, name: "坦克汽车用户社群增长运营" })).toBeInTheDocument();
     expect(screen.getByText("客户背景")).toBeInTheDocument();
@@ -34,8 +34,8 @@ describe("service cases pages", () => {
     expect(screen.getByRole("link", { name: "咨询类似项目" })).toHaveAttribute("href", "/contact");
   });
 
-  it("does not render empty metric blocks when public metrics are confidential", () => {
-    render(<CaseDetailPage params={{ slug: "lynk-social-content-operation" }} />);
+  it("does not render empty metric blocks when public metrics are confidential", async () => {
+    render(await CaseDetailPage({ params: Promise.resolve({ slug: "lynk-social-content-operation" }) }));
 
     expect(screen.getByRole("heading", { level: 1, name: "领克汽车社会化内容运营" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "案例结果" })).toBeInTheDocument();

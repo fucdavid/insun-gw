@@ -52,3 +52,13 @@ test.describe("service detail browser rendering", () => {
     expect(pageBackground).toBe("rgb(247, 247, 244)");
   });
 });
+
+test.describe("case detail browser rendering", () => {
+  test("renders a generated business case detail route", async ({ page }) => {
+    await page.goto("/cases/tank-user-community-growth");
+
+    await expect(page.getByRole("heading", { level: 1, name: "坦克汽车用户社群增长运营" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "案例结果" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "咨询类似项目" })).toBeVisible();
+  });
+});

@@ -3,17 +3,18 @@ import { notFound } from "next/navigation";
 import { getBusinessCaseBySlug, getBusinessCases, getServiceBySlug } from "@/lib/content";
 
 type CaseDetailPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
   return getBusinessCases().map((businessCase) => ({ slug: businessCase.slug }));
 }
 
-export default function CaseDetailPage({ params }: CaseDetailPageProps) {
-  const businessCase = getBusinessCaseBySlug(params.slug);
+export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
+  const { slug } = await params;
+  const businessCase = getBusinessCaseBySlug(slug);
 
   if (!businessCase) {
     notFound();
