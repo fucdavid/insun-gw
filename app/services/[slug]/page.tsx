@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getClientLogoDataUri } from "@/lib/client-logo";
 import { getHomepageServices, getServiceBySlug } from "@/lib/content";
 
 type ServiceDetailPageProps = {
@@ -60,9 +61,14 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
       <section className="bg-[#f7f7f4] px-5 py-16">
         <div className="mx-auto max-w-7xl">
           <h2 className="text-2xl font-semibold tracking-normal text-[#1c1c1a]">代表客户</h2>
-          <p className="mt-5 max-w-4xl text-base leading-8 text-[#3b3b35]">
-            {(service.representativeClients ?? []).join(" · ")}
-          </p>
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {(service.representativeClients ?? []).map((client) => (
+              <div key={client} className="flex min-h-24 items-center justify-center rounded-sm border border-black/10 bg-white p-4">
+                <img src={getClientLogoDataUri(client)} alt={`${client} logo`} className="h-14 w-full object-contain" />
+                <span className="sr-only">{client}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </main>

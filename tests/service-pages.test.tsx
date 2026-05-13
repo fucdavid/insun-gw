@@ -32,7 +32,7 @@ describe("core service pages", () => {
     expect(screen.getByText(/服务对象/)).toBeInTheDocument();
     expect(screen.getByText(/业务模块/)).toBeInTheDocument();
     expect(screen.getByText(/代表客户/)).toBeInTheDocument();
-    expect(screen.getByText(/坦克汽车/)).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "坦克汽车 logo" })).toBeInTheDocument();
     expect(screen.getByText(/企业微信/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "咨询合作" })).toHaveAttribute("href", "/contact");
   });
