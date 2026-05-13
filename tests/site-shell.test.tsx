@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { SiteShell } from "@/components/site-shell";
 
 describe("SiteShell", () => {
-  it("renders the primary navigation and footer for the Yingsheng Company Website", () => {
+  it("renders the primary navigation and footer for the insun company website", () => {
     render(
       <SiteShell>
         <main>页面内容</main>

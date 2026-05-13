@@ -65,4 +65,14 @@ describe("homepage", () => {
     expect(screen.getByText(/金融/)).toBeInTheDocument();
     expect(screen.getByText(/旅游/)).toBeInTheDocument();
   });
+
+  it("renders homepage as full-screen scroll panels", () => {
+    render(<HomePage />);
+
+    expect(screen.getByRole("region", { name: "首页首屏" })).toHaveAttribute("data-panel", "home");
+    expect(screen.getByRole("region", { name: "核心业务" })).toHaveAttribute("data-panel", "services");
+    expect(screen.getByRole("region", { name: "服务案例" })).toHaveAttribute("data-panel", "cases");
+    expect(screen.getByRole("region", { name: "映盛研究院" })).toHaveAttribute("data-panel", "research");
+    expect(screen.getByRole("region", { name: "关于映盛" })).toHaveAttribute("data-panel", "about");
+  });
 });
