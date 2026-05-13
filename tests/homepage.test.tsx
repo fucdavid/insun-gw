@@ -74,5 +74,8 @@ describe("homepage", () => {
     expect(screen.getByRole("region", { name: "服务案例" })).toHaveAttribute("data-panel", "cases");
     expect(screen.getByRole("region", { name: "映盛研究院" })).toHaveAttribute("data-panel", "research");
     expect(screen.getByRole("region", { name: "关于映盛" })).toHaveAttribute("data-panel", "about");
+    expect(screen.getByRole("navigation", { name: "首页模块导航" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "切换到下一屏" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "切换到核心业务" })).not.toHaveAttribute("aria-current");
   });
 });

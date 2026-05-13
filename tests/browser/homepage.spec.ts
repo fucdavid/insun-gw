@@ -6,9 +6,9 @@ test.describe("homepage browser rendering", () => {
 
     await expect(page.getByRole("heading", { level: 1, name: "让品牌增长，回到真实用户关系" })).toBeVisible();
     await expect(page.getByRole("img", { name: "映盛 logo" })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 2, name: "用户运营" })).toBeVisible();
     await expect(page.getByRole("link", { name: "咨询合作" }).first()).toBeVisible();
 
+    const fullpage = page.locator('[aria-label="首页整屏切换"]');
     const hero = page.getByRole("region", { name: "首页首屏" });
     const heroHeight = await hero.evaluate((element) => element.getBoundingClientRect().height);
     const viewport = page.viewportSize();
@@ -20,9 +20,21 @@ test.describe("homepage browser rendering", () => {
     expect(heroHeight).toBeGreaterThanOrEqual((viewport?.height ?? 720) - 2);
     expect(heroBackground).toContain("/home/hero.png");
     expect(heroHeadingFontSize).toBeGreaterThan(40);
+    await expect(fullpage).toHaveAttribute("data-active-panel", "首页首屏");
 
-    await page.getByRole("region", { name: "核心业务" }).scrollIntoViewIfNeeded();
+    if ((viewport?.width ?? 0) >= 768) {
+      await expect(page.getByRole("button", { name: "切换到下一屏" })).toBeVisible();
+    }
+
+    await page.mouse.wheel(0, 900);
+    await expect(fullpage).toHaveAttribute("data-active-panel", "核心业务");
     await expect(page.getByRole("heading", { level: 2, name: "用户运营" })).toBeVisible();
+
+    if ((viewport?.width ?? 0) >= 768) {
+      await page.getByRole("button", { name: "切换到服务案例" }).click();
+      await expect(fullpage).toHaveAttribute("data-active-panel", "服务案例");
+      await expect(page.getByRole("heading", { level: 2, name: "从真实项目里看增长路径" })).toBeVisible();
+    }
   });
 });
 

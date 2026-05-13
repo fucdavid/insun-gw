@@ -14,12 +14,12 @@ export function HomepagePanel({ id, label, backgroundImage, children, align = "c
       id={id}
       aria-label={label}
       data-panel={id}
-      className="relative flex min-h-screen snap-start overflow-hidden bg-[#101214] bg-cover bg-center px-5 py-24 text-white"
+      className="relative flex h-screen shrink-0 overflow-hidden bg-[#f3f7fb] bg-cover bg-center px-5 py-24 text-white"
       style={{ "--panel-bg": `url(${backgroundImage})`, backgroundImage: "var(--panel-bg)" } as CSSProperties}
     >
-      <div className="absolute inset-0 bg-black/55" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0,rgba(0,0,0,0.45)_72%)]" />
-      <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(circle,rgba(255,255,255,0.42)_1px,transparent_1px)] [background-size:4px_4px]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/52 via-black/18 to-white/6" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.18)_0,rgba(255,255,255,0.08)_68%)]" />
+      <div className="absolute inset-0 opacity-18 [background-image:radial-gradient(circle,rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:4px_4px]" />
       <div
         className={
           align === "left"

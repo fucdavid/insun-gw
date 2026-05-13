@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FullpageHome } from "@/components/fullpage-home";
 import { HomepagePanel } from "@/components/homepage-panel";
 import { getHomepageServices } from "@/lib/content";
 
@@ -6,7 +7,8 @@ export default function HomePage() {
   const services = getHomepageServices();
 
   return (
-    <main className="snap-y snap-proximity bg-[#101214]">
+    <main className="bg-[#f3f7fb]">
+      <FullpageHome labels={["首页首屏", "核心业务", "服务案例", "映盛研究院", "关于映盛"]}>
       <HomepagePanel id="home" label="首页首屏" backgroundImage="/home/hero.png">
         <div className="max-w-5xl">
           <p className="mb-5 text-sm font-medium uppercase tracking-[0.4em] text-white/70">INSUN Digital Growth</p>
@@ -105,6 +107,7 @@ export default function HomePage() {
           </div>
         </div>
       </HomepagePanel>
+      </FullpageHome>
     </main>
   );
 }
