@@ -44,9 +44,12 @@ test.describe("service detail browser rendering", () => {
 
     await expect(page.getByRole("heading", { level: 1, name: "用户运营" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "服务内容" })).toBeVisible();
-    await expect(page.getByRole("heading", { level: 2, name: "代表客户" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "全链路运营模型" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "服务客户" })).toBeVisible();
+    await expect(page.getByRole("img", { name: "用户运营服务场景" })).toBeVisible();
     await expect(page.getByRole("img", { name: "坦克汽车 logo" })).toBeVisible();
     await expect(page.getByRole("main").getByRole("link", { name: "咨询合作" })).toBeVisible();
+    await expect(page.getByRole("main").getByRole("link", { name: "查看案例" })).toBeVisible();
 
     const pageBackground = await page.locator("body").evaluate((element) => getComputedStyle(element).backgroundColor);
     expect(pageBackground).toBe("rgb(247, 247, 244)");

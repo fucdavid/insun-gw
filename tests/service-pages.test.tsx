@@ -31,10 +31,15 @@ describe("core service pages", () => {
     expect(screen.getByText(/服务平台/)).toBeInTheDocument();
     expect(screen.getByText(/服务对象/)).toBeInTheDocument();
     expect(screen.getByText(/业务模块/)).toBeInTheDocument();
-    expect(screen.getByText(/代表客户/)).toBeInTheDocument();
+    expect(screen.getByText(/服务客户/)).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "坦克汽车 logo" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "用户运营服务场景" })).toBeInTheDocument();
     expect(screen.getByText(/企业微信/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "咨询合作" })).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("link", { name: "查看案例" })).toHaveAttribute("href", "/cases");
+    expect(screen.getByRole("heading", { level: 2, name: "全链路运营模型" })).toBeInTheDocument();
+    expect(screen.getByText("公域获客")).toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "核心业务菜单" })).not.toBeInTheDocument();
   });
 
   it("renders all six service detail pages with required sections and representative clients", async () => {
@@ -52,7 +57,7 @@ describe("core service pages", () => {
       expect(screen.getByText(/服务平台/)).toBeInTheDocument();
       expect(screen.getByText(/服务对象/)).toBeInTheDocument();
       expect(screen.getByText(/业务模块/)).toBeInTheDocument();
-      expect(screen.getByText(/代表客户/)).toBeInTheDocument();
+      expect(screen.getByText(/服务客户/)).toBeInTheDocument();
       expect(screen.getByRole("link", { name: "咨询合作" })).toHaveAttribute("href", "/contact");
       expect(screen.getAllByText(/汽车/).length).toBeGreaterThan(0);
 
