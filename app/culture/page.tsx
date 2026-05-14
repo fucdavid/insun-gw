@@ -51,6 +51,23 @@ export default function CulturePage() {
           </div>
         </div>
       </section>
+
+      <section className="px-5 pb-20">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
+          <article className="border border-black/10 bg-white p-7 shadow-sm">
+            <h2 className="text-3xl font-semibold tracking-normal">员工活动</h2>
+            <p className="mt-5 text-base leading-8 text-[#5f6058]">
+              团队活动围绕项目复盘、案例分享、跨岗位协作和阶段性团队共创展开，让运营、内容、设计、技术和客户服务角色能在真实项目中互相理解。
+            </p>
+          </article>
+          <article className="border border-black/10 bg-white p-7 shadow-sm">
+            <h2 className="text-3xl font-semibold tracking-normal">办公环境</h2>
+            <p className="mt-5 text-base leading-8 text-[#5f6058]">
+              映盛强调安静、开放和面向交付的工作环境。办公协作以清晰沟通、资料沉淀、快速响应和高质量内容产出为核心。
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }

@@ -45,6 +45,28 @@ export default function AboutPage() {
       </section>
 
       <section className="px-5 pb-20">
+        <div className="mx-auto mb-6 grid max-w-7xl gap-5 md:grid-cols-3">
+          {[
+            [
+              "发展与沉淀",
+              "映盛长期围绕汽车、消费品、金融、旅游等行业的品牌增长议题沉淀方法，服务从内容传播、用户运营到数字阵地建设的完整链路。"
+            ],
+            [
+              "优势行业",
+              "汽车行业是映盛重点服务和经验积累较深的方向，同时能力可延展至消费品、金融、旅游等需要长期用户关系经营的行业。"
+            ],
+            [
+              "资质与荣誉说明",
+              "官网不展示未经核验的资质、奖项或荣誉信息。涉及企业资质、项目授权或客户背书时，以双方确认后的正式材料为准。"
+            ]
+          ].map(([title, body]) => (
+            <article key={title} className="border border-black/10 bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-semibold tracking-normal">{title}</h2>
+              <p className="mt-4 text-sm leading-7 text-[#5f6058]">{body}</p>
+            </article>
+          ))}
+        </div>
+
         <div className="mx-auto max-w-7xl border border-black/10 bg-[#20231f] p-7 text-white md:p-9">
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>

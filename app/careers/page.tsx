@@ -45,14 +45,26 @@ export default function CareersPage() {
             </p>
           </div>
           <div className="border border-[#dce6f2] bg-[#172033] p-7 text-white shadow-sm">
-            <h2 className="text-3xl font-semibold tracking-normal">候选人关注</h2>
+            <h2 className="text-3xl font-semibold tracking-normal">开放方向</h2>
             <p className="mt-5 text-base leading-8 text-white/72">
               我们重视清晰表达、稳定交付、主动复盘和对用户真实需求的敏感度。无论你来自运营、内容、市场还是数字产品方向，都需要能把复杂问题拆成可执行动作。
             </p>
             <Link href="/contact" className="mt-8 inline-flex min-h-12 items-center justify-center rounded-sm bg-white px-6 text-base font-semibold text-[#101214]">
-              联系加入映盛
+              了解申请渠道
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-20">
+        <div className="mx-auto max-w-7xl border border-[#dce6f2] bg-white p-7 shadow-sm md:p-9">
+          <h2 className="text-3xl font-semibold tracking-normal">申请渠道</h2>
+          <p className="mt-5 max-w-3xl text-base leading-8 text-[#5a6880]">
+            候选人可以通过官网咨询入口联系映盛，说明期望方向、过往项目经验和可到岗时间。映盛会根据业务需求与岗位匹配情况安排后续沟通。
+          </p>
+          <Link href="/contact" className="mt-8 inline-flex min-h-12 items-center justify-center rounded-sm bg-[#1267e8] px-6 text-base font-medium text-white">
+            联系加入映盛
+          </Link>
         </div>
       </section>
     </main>
