@@ -30,5 +30,6 @@ describe("SiteShell", () => {
     expect(screen.queryByRole("link", { name: "移动导航-FAQ" })).not.toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toHaveTextContent("咨询合作");
     expect(screen.getByRole("contentinfo").querySelector('a[href="/faq"]')).toHaveTextContent("FAQ");
+    expect(screen.getByRole("contentinfo").querySelector('a[href="/privacy"]')).toHaveTextContent("隐私政策");
   });
 });

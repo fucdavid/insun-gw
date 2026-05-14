@@ -61,6 +61,9 @@ export function SiteShell({ children }: SiteShellProps) {
             <Link href="/faq" className="text-sm text-white/62 transition hover:text-white">
               FAQ
             </Link>
+            <Link href="/privacy" className="text-sm text-white/62 transition hover:text-white">
+              隐私政策
+            </Link>
             <Link href="/contact" className="text-sm font-medium text-white">
               咨询合作
             </Link>

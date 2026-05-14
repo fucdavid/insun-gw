@@ -89,6 +89,33 @@ test.describe("company content browser rendering", () => {
   });
 });
 
+test.describe("consultation form browser rendering", () => {
+  test("submits a consultation lead and shows success or actionable failure", async ({ page }) => {
+    await page.goto("/contact");
+    await page.getByLabel("姓名").fill("张三");
+    await page.getByLabel("公司").fill("测试品牌");
+    await page.getByLabel("联系方式").fill("zhangsan@example.com");
+    await page.getByLabel("需求描述").fill("希望了解用户运营和数字渠道建设服务。");
+    await page.getByRole("button", { name: "提交咨询" }).click();
+    await expect(page.getByText("咨询已提交，映盛团队会尽快联系你。")).toBeVisible();
+
+    await page.route("**/api/leads", async (route) => {
+      await route.fulfill({
+        status: 500,
+        contentType: "application/json",
+        body: JSON.stringify({ ok: false, message: "提交失败，请稍后重试或直接发送邮件。" })
+      });
+    });
+    await page.goto("/contact");
+    await page.getByLabel("姓名").fill("李四");
+    await page.getByLabel("公司").fill("测试品牌");
+    await page.getByLabel("联系方式").fill("lisi@example.com");
+    await page.getByLabel("需求描述").fill("希望了解直播/短视频营销服务。");
+    await page.getByRole("button", { name: "提交咨询" }).click();
+    await expect(page.getByText("提交失败，请稍后重试或直接发送邮件。")).toBeVisible();
+  });
+});
+
 test.describe("service detail browser rendering", () => {
   test("renders a service detail page with crawlable sections and CSS", async ({ page }) => {
     await page.goto("/services/user-operations");
