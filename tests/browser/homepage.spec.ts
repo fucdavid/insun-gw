@@ -38,6 +38,36 @@ test.describe("homepage browser rendering", () => {
   });
 });
 
+test.describe("site navigation browser rendering", () => {
+  test("opens the mobile navigation and keeps FAQ accessible as a direct GEO page", async ({ page }) => {
+    await page.goto("/");
+
+    const viewport = page.viewportSize();
+    if ((viewport?.width ?? 0) < 768) {
+      await page.getByText("打开导航菜单").click();
+      await expect(page.getByRole("navigation", { name: "移动导航" }).getByRole("link", { name: "移动导航-核心业务" })).toBeVisible();
+      await expect(page.getByRole("link", { name: "移动导航-FAQ" })).toHaveCount(0);
+    }
+
+    await page.goto("/faq");
+    await expect(page.getByRole("heading", { level: 1, name: "FAQ" })).toBeVisible();
+  });
+});
+
+test.describe("listing page browser rendering", () => {
+  test("renders sales-ready services and cases listing pages", async ({ page }) => {
+    await page.goto("/services");
+    await expect(page.getByRole("heading", { level: 1, name: "核心业务" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "用户运营" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "咨询适合的业务组合" })).toBeVisible();
+
+    await page.goto("/cases");
+    await expect(page.getByRole("heading", { level: 1, name: "服务案例" })).toBeVisible();
+    await expect(page.getByText(/用真实项目展示映盛如何把策略、内容、运营和数字阵地连接起来/)).toBeVisible();
+    await expect(page.getByRole("link", { name: "咨询类似服务案例" })).toBeVisible();
+  });
+});
+
 test.describe("service detail browser rendering", () => {
   test("renders a service detail page with crawlable sections and CSS", async ({ page }) => {
     await page.goto("/services/user-operations");

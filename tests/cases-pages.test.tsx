@@ -8,13 +8,16 @@ describe("service cases pages", () => {
     render(<CasesPage />);
 
     expect(screen.getByRole("heading", { level: 1, name: "服务案例" })).toBeInTheDocument();
+    expect(screen.getByText(/用真实项目展示映盛如何把策略、内容、运营和数字阵地连接起来/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "坦克汽车用户社群增长运营" })).toBeInTheDocument();
     expect(screen.getByText(/围绕高价值用户识别/)).toBeInTheDocument();
     expect(screen.getByText("相关服务：用户运营")).toBeInTheDocument();
+    expect(screen.getAllByText(/私域用户资产/).length).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "查看坦克汽车用户社群增长运营案例" })).toHaveAttribute(
       "href",
       "/cases/tank-user-community-growth"
     );
+    expect(screen.getByRole("link", { name: "咨询类似服务案例" })).toHaveAttribute("href", "/contact");
     expect(screen.getAllByRole("article")).toHaveLength(3);
   });
 

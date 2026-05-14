@@ -9,6 +9,7 @@ type SiteShellProps = {
 
 export function SiteShell({ children }: SiteShellProps) {
   const primaryNavigation = getPrimaryNavigation();
+  const mobileNavigation = [...primaryNavigation, { label: "咨询合作", href: "/contact" }];
 
   return (
     <div className="min-h-screen bg-[#f7f7f4] text-[#1c1c1a]">
@@ -24,9 +25,29 @@ export function SiteShell({ children }: SiteShellProps) {
               </Link>
             ))}
           </nav>
+          <details className="group relative md:hidden">
+            <summary className="flex min-h-10 cursor-pointer list-none items-center justify-center rounded-sm border border-white/35 px-4 text-sm font-medium text-white transition hover:border-white">
+              打开导航菜单
+            </summary>
+            <nav
+              aria-label="移动导航"
+              className="absolute right-0 top-12 w-56 border border-white/18 bg-[#20231f]/96 p-3 shadow-2xl backdrop-blur"
+            >
+              {mobileNavigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-label={`移动导航-${item.label}`}
+                  className="block border-b border-white/10 px-3 py-3 text-sm text-white/82 last:border-b-0 hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </details>
           <Link
             href="/contact"
-            className="inline-flex min-h-10 items-center justify-center rounded-sm border border-white/35 px-4 text-sm font-medium text-white transition hover:border-white"
+            className="hidden min-h-10 items-center justify-center rounded-sm border border-white/35 px-4 text-sm font-medium text-white transition hover:border-white md:inline-flex"
           >
             咨询合作
           </Link>

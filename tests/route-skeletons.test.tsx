@@ -30,4 +30,14 @@ describe("route skeletons", () => {
 
     expect(screen.getByRole("heading", { name: heading, level: 1 })).toBeInTheDocument();
   });
+
+  it("renders a sales-ready services landing page", () => {
+    render(<ServicesPage />);
+
+    expect(screen.getByText(/六大核心业务围绕真实用户关系/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "用户运营" })).toBeInTheDocument();
+    expect(screen.getByText("APP运营 · 小程序运营 · KOC运营 · 社群运营")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "了解用户运营" })).toHaveAttribute("href", "/services/user-operations");
+    expect(screen.getByRole("link", { name: "咨询适合的业务组合" })).toHaveAttribute("href", "/contact");
+  });
 });

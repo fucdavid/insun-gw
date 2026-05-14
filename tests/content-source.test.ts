@@ -10,8 +10,7 @@ describe("Static Content Source", () => {
       { label: "映盛研究院", href: "/research" },
       { label: "映盛文化", href: "/culture" },
       { label: "关于映盛", href: "/about" },
-      { label: "加入我们", href: "/careers" },
-      { label: "FAQ", href: "/faq" }
+      { label: "加入我们", href: "/careers" }
     ]);
   });
 

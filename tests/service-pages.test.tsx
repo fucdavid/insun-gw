@@ -17,7 +17,7 @@ describe("core service pages", () => {
     ] as const;
 
     for (const [name, href] of expectedLinks) {
-      expect(screen.getByRole("link", { name })).toHaveAttribute("href", href);
+      expect(screen.getByRole("link", { name: `了解${name}` })).toHaveAttribute("href", href);
     }
 
     expect(screen.queryByRole("link", { name: /GEO/ })).not.toBeInTheDocument();
