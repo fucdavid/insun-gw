@@ -21,22 +21,35 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
   }
 
   return (
-    <main className="bg-[#f7f7f4] px-5 pb-20 pt-28">
-      <article className="mx-auto max-w-4xl">
-        <Link href="/research" className="text-sm font-medium text-[#0f5b4f]">
-          返回映盛研究院
-        </Link>
-        <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-[#687064]">
-          <span className="font-medium text-[#0f5b4f]">{article.category}</span>
-          <span>{article.publishedAt}</span>
-          <span>{article.readingTime}</span>
-        </div>
-        <h1 className="mt-5 text-5xl font-semibold leading-tight tracking-normal text-[#1c1c1a]">{article.title}</h1>
-        <p className="mt-6 text-xl leading-8 text-[#5f6058]">{article.summary}</p>
+    <main className="bg-[#f7f7f4] px-5 pb-20 pt-28 text-[#1c1c1a]">
+      <article className="mx-auto max-w-5xl">
+        <header className="border border-black/10 bg-white p-7 shadow-sm md:p-9">
+          <Link href="/research" className="text-sm font-medium text-[#0f5b4f]">
+            返回映盛研究院
+          </Link>
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-[#687064]">
+            <span className="font-medium text-[#0f5b4f]">{article.category}</span>
+            <span>{article.publishedAt}</span>
+            <span>{article.readingTime}</span>
+          </div>
+          <h1 className="mt-5 text-5xl font-semibold leading-tight tracking-normal text-[#1c1c1a]">{article.title}</h1>
+          <p className="mt-6 text-xl leading-8 text-[#5f6058]">{article.summary}</p>
+        </header>
 
-        <div className="mt-12 space-y-10 border-t border-black/10 pt-10">
+        <section className="mt-8 border border-black/10 bg-[#20231f] p-7 text-white shadow-sm">
+          <h2 className="text-2xl font-semibold tracking-normal">文章导读</h2>
+          <ul className="mt-5 grid gap-3 md:grid-cols-2">
+            {article.sections.map((section) => (
+              <li key={section.heading} className="border border-white/15 p-4 text-sm leading-6 text-white/76">
+                {section.heading}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <div className="mt-12 space-y-10">
           {article.sections.map((section) => (
-            <section key={section.heading}>
+            <section key={section.heading} className="border border-black/10 bg-white p-7 shadow-sm md:p-9">
               <h2 className="text-2xl font-semibold tracking-normal text-[#1c1c1a]">{section.heading}</h2>
               <p className="mt-4 text-lg leading-9 text-[#4f504a]">{section.body}</p>
             </section>

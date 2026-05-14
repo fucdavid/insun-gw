@@ -68,6 +68,24 @@ test.describe("listing page browser rendering", () => {
   });
 });
 
+test.describe("company content browser rendering", () => {
+  test("renders about, culture and careers pages with real crawlable content", async ({ page }) => {
+    await page.goto("/about");
+    await expect(page.getByRole("heading", { level: 1, name: "关于映盛" })).toBeVisible();
+    await expect(page.getByText(/映盛是面向中大型品牌的数字营销与用户运营服务商/)).toBeVisible();
+    await expect(page.getByRole("link", { name: "咨询映盛服务" })).toBeVisible();
+
+    await page.goto("/culture");
+    await expect(page.getByRole("heading", { level: 1, name: "映盛文化" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "工作方式" })).toBeVisible();
+
+    await page.goto("/careers");
+    await expect(page.getByRole("heading", { level: 1, name: "加入我们" })).toBeVisible();
+    await expect(page.getByText(/适合愿意理解品牌、用户和内容的人/)).toBeVisible();
+    await expect(page.getByRole("link", { name: "联系加入映盛" })).toBeVisible();
+  });
+});
+
 test.describe("service detail browser rendering", () => {
   test("renders a service detail page with crawlable sections and CSS", async ({ page }) => {
     await page.goto("/services/user-operations");
@@ -98,9 +116,14 @@ test.describe("case detail browser rendering", () => {
 
 test.describe("research detail browser rendering", () => {
   test("renders a generated research article route with crawlable content", async ({ page }) => {
+    await page.goto("/research");
+    await expect(page.getByRole("heading", { level: 2, name: "专题分类" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "推荐阅读" })).toBeVisible();
+
     await page.goto("/research/private-domain-user-operations");
 
     await expect(page.getByRole("heading", { level: 1, name: "为什么品牌需要重新理解私域用户运营" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "文章导读" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 2, name: "私域运营正在从触达工具走向关系资产" })).toBeVisible();
     await expect(page.getByText(/品牌官网、企业微信、品牌APP、小程序和社群/)).toBeVisible();
   });
