@@ -29,5 +29,6 @@ describe("SiteShell", () => {
     expect(screen.getByRole("link", { name: "移动导航-核心业务" })).toHaveAttribute("href", "/services");
     expect(screen.queryByRole("link", { name: "移动导航-FAQ" })).not.toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toHaveTextContent("咨询合作");
+    expect(screen.getByRole("contentinfo").querySelector('a[href="/faq"]')).toHaveTextContent("FAQ");
   });
 });

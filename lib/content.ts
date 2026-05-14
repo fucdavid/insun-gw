@@ -53,6 +53,12 @@ export type ResearchArticle = {
   }>;
 };
 
+export type FaqItem = {
+  category: string;
+  question: string;
+  answer: string;
+};
+
 export function getPrimaryNavigation(): NavigationItem[] {
   return siteContent.primaryNavigation;
 }
@@ -79,4 +85,8 @@ export function getResearchArticles(): ResearchArticle[] {
 
 export function getResearchArticleBySlug(slug: string): ResearchArticle | undefined {
   return siteContent.researchArticles.find((article) => article.slug === slug);
+}
+
+export function getFaqItems(): FaqItem[] {
+  return siteContent.faqItems;
 }

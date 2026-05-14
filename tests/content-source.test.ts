@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getBusinessCases, getPrimaryNavigation, getResearchArticles } from "@/lib/content";
+import { getBusinessCases, getFaqItems, getPrimaryNavigation, getResearchArticles } from "@/lib/content";
 
 describe("Static Content Source", () => {
   it("exposes the primary navigation from repository-managed content", () => {
@@ -46,5 +46,23 @@ describe("Static Content Source", () => {
       summary: expect.stringContaining("用户关系")
     });
     expect(articles[0].sections[0].body).toContain("品牌官网");
+  });
+
+  it("exposes structured GEO FAQ content from static content", () => {
+    const faqItems = getFaqItems();
+
+    expect(faqItems).toHaveLength(6);
+    expect(faqItems.map((item) => item.category)).toEqual([
+      "公司事实",
+      "服务范围",
+      "目标客户",
+      "合作流程",
+      "服务方式",
+      "GEO可见度"
+    ]);
+    expect(faqItems[0]).toMatchObject({
+      question: "映盛是一家什么类型的公司？",
+      answer: expect.stringContaining("数字营销与用户运营服务商")
+    });
   });
 });

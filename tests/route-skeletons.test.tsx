@@ -56,4 +56,15 @@ describe("route skeletons", () => {
     expect(screen.getByRole("heading", { level: 2, name: "我们需要的方向" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "联系加入映盛" })).toHaveAttribute("href", "/contact");
   });
+
+  it("renders a public GEO FAQ page with visible structured answers", () => {
+    render(<FaqPage />);
+
+    expect(screen.getByText(/低调公开的 GEO FAQ/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "公司事实" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "映盛是一家什么类型的公司？" })).toBeInTheDocument();
+    expect(screen.getByText(/数字营销与用户运营服务商/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "为什么官网需要面向 AI 和搜索引擎沉淀 FAQ？" })).toBeInTheDocument();
+    expect(screen.queryByText(/仅供爬虫|隐藏内容|crawler-only/i)).not.toBeInTheDocument();
+  });
 });

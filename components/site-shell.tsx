@@ -57,9 +57,14 @@ export function SiteShell({ children }: SiteShellProps) {
       <footer className="border-t border-black/10 bg-[#20231f] text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-white/70">映盛 · 数字营销与用户运营服务商</p>
-          <Link href="/contact" className="text-sm font-medium text-white">
-            咨询合作
-          </Link>
+          <div className="flex flex-wrap gap-5">
+            <Link href="/faq" className="text-sm text-white/62 transition hover:text-white">
+              FAQ
+            </Link>
+            <Link href="/contact" className="text-sm font-medium text-white">
+              咨询合作
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

@@ -51,6 +51,9 @@ test.describe("site navigation browser rendering", () => {
 
     await page.goto("/faq");
     await expect(page.getByRole("heading", { level: 1, name: "FAQ" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 3, name: "映盛是一家什么类型的公司？" })).toBeVisible();
+    await expect(page.getByRole("main").getByText(/数字营销与用户运营服务商/)).toBeVisible();
+    await expect(page.getByRole("contentinfo").getByRole("link", { name: "FAQ" })).toHaveAttribute("href", "/faq");
   });
 });
 
