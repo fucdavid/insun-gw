@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { existsSync, readdirSync } from "node:fs";
+import path from "node:path";
+import siteContent from "@/content/site.json";
 import { getBusinessCases, getFaqItems, getPrimaryNavigation, getResearchArticles } from "@/lib/content";
+import { parseResearchArticleMarkdown } from "@/lib/research-content";
 
 describe("Static Content Source", () => {
   it("exposes the primary navigation from repository-managed content", () => {
@@ -32,8 +36,14 @@ describe("Static Content Source", () => {
 
   it("exposes research articles with GEO-friendly topic classification", () => {
     const articles = getResearchArticles();
+    const researchDirectory = path.join(process.cwd(), "content", "research");
+    const articleFiles = existsSync(researchDirectory)
+      ? readdirSync(researchDirectory).filter((fileName) => fileName.endsWith(".md"))
+      : [];
 
     expect(articles).toHaveLength(4);
+    expect(articleFiles).toHaveLength(4);
+    expect("researchArticles" in siteContent).toBe(false);
     expect(articles.map((article) => article.category)).toEqual([
       "行业洞察",
       "营销方法论",
@@ -64,5 +74,26 @@ describe("Static Content Source", () => {
       question: "映盛是一家什么类型的公司？",
       answer: expect.stringContaining("数字营销与用户运营服务商")
     });
+  });
+
+  it("fails clearly when a Research Institute article is missing required frontmatter", () => {
+    expect(() =>
+      parseResearchArticleMarkdown(
+        "missing-summary.md",
+        [
+          "---",
+          "slug: missing-summary",
+          "title: 缺少摘要的文章",
+          "category: 行业洞察",
+          "publishedAt: 2026-05-14",
+          "readingTime: 3分钟阅读",
+          "---",
+          "",
+          "## 小标题",
+          "",
+          "正文内容"
+        ].join("\n")
+      )
+    ).toThrow("missing required frontmatter field: summary");
   });
 });

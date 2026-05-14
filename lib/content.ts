@@ -1,4 +1,5 @@
 import siteContent from "@/content/site.json";
+import { getMarkdownResearchArticles } from "@/lib/research-content";
 
 export type NavigationItem = {
   label: string;
@@ -80,11 +81,11 @@ export function getBusinessCaseBySlug(slug: string): BusinessCase | undefined {
 }
 
 export function getResearchArticles(): ResearchArticle[] {
-  return siteContent.researchArticles;
+  return getMarkdownResearchArticles();
 }
 
 export function getResearchArticleBySlug(slug: string): ResearchArticle | undefined {
-  return siteContent.researchArticles.find((article) => article.slug === slug);
+  return getResearchArticles().find((article) => article.slug === slug);
 }
 
 export function getFaqItems(): FaqItem[] {
