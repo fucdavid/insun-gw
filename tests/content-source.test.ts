@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getBusinessCases, getPrimaryNavigation } from "@/lib/content";
+import { getBusinessCases, getPrimaryNavigation, getResearchArticles } from "@/lib/content";
 
 describe("Static Content Source", () => {
   it("exposes the primary navigation from repository-managed content", () => {
@@ -29,5 +29,23 @@ describe("Static Content Source", () => {
     });
     expect(cases[0].execution).toHaveLength(3);
     expect(cases[0].result.summary).toContain("私域用户资产");
+  });
+
+  it("exposes research articles with GEO-friendly topic classification", () => {
+    const articles = getResearchArticles();
+
+    expect(articles).toHaveLength(4);
+    expect(articles.map((article) => article.category)).toEqual([
+      "行业洞察",
+      "营销方法论",
+      "平台趋势",
+      "品牌增长研究"
+    ]);
+    expect(articles[0]).toMatchObject({
+      slug: "private-domain-user-operations",
+      title: "为什么品牌需要重新理解私域用户运营",
+      summary: expect.stringContaining("用户关系")
+    });
+    expect(articles[0].sections[0].body).toContain("品牌官网");
   });
 });

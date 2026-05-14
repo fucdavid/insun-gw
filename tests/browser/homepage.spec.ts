@@ -65,3 +65,13 @@ test.describe("case detail browser rendering", () => {
     await expect(page.getByRole("link", { name: "咨询类似项目" })).toBeVisible();
   });
 });
+
+test.describe("research detail browser rendering", () => {
+  test("renders a generated research article route with crawlable content", async ({ page }) => {
+    await page.goto("/research/private-domain-user-operations");
+
+    await expect(page.getByRole("heading", { level: 1, name: "为什么品牌需要重新理解私域用户运营" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: "私域运营正在从触达工具走向关系资产" })).toBeVisible();
+    await expect(page.getByText(/品牌官网、企业微信、品牌APP、小程序和社群/)).toBeVisible();
+  });
+});

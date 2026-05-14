@@ -40,6 +40,19 @@ export type BusinessCase = {
   };
 };
 
+export type ResearchArticle = {
+  slug: string;
+  title: string;
+  category: string;
+  summary: string;
+  publishedAt: string;
+  readingTime: string;
+  sections: Array<{
+    heading: string;
+    body: string;
+  }>;
+};
+
 export function getPrimaryNavigation(): NavigationItem[] {
   return siteContent.primaryNavigation;
 }
@@ -58,4 +71,12 @@ export function getBusinessCases(): BusinessCase[] {
 
 export function getBusinessCaseBySlug(slug: string): BusinessCase | undefined {
   return siteContent.businessCases.find((businessCase) => businessCase.slug === slug);
+}
+
+export function getResearchArticles(): ResearchArticle[] {
+  return siteContent.researchArticles;
+}
+
+export function getResearchArticleBySlug(slug: string): ResearchArticle | undefined {
+  return siteContent.researchArticles.find((article) => article.slug === slug);
 }
