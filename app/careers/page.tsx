@@ -1,4 +1,11 @@
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "加入我们",
+  description: "加入映盛，参与用户运营、社媒内容、口碑传播、公关活动和数字渠道建设等真实品牌项目。",
+  path: "/careers"
+});
 
 export default function CareersPage() {
   return (

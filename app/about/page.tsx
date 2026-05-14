@@ -1,4 +1,11 @@
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "关于映盛",
+  description: "了解映盛的公司定位、服务对象、服务方式和围绕真实用户关系的数字营销与用户运营能力。",
+  path: "/about"
+});
 
 export default function AboutPage() {
   return (

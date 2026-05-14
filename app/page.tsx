@@ -2,6 +2,13 @@ import Link from "next/link";
 import { FullpageHome } from "@/components/fullpage-home";
 import { HomepagePanel } from "@/components/homepage-panel";
 import { getHomepageServices } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "数字营销与用户运营服务商",
+  description: "映盛面向中大型品牌，提供用户运营、口碑营销、社会化媒体营销、直播/短视频营销、互动公关与数字渠道建设服务。",
+  path: "/"
+});
 
 export default function HomePage() {
   const services = getHomepageServices();

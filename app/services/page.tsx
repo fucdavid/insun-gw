@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { getHomepageServices } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "核心业务",
+  description: "映盛六大核心业务覆盖用户运营、口碑营销、社会化媒体营销、直播/短视频营销、互动公关和数字渠道建设。",
+  path: "/services"
+});
 
 export default function ServicesPage() {
   const services = getHomepageServices();

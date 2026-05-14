@@ -1,4 +1,11 @@
 import { ConsultationForm } from "@/components/consultation-form";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "咨询合作",
+  description: "通过映盛官网咨询用户运营、口碑营销、社会化媒体营销、直播/短视频营销、互动公关和数字渠道建设服务。",
+  path: "/contact"
+});
 
 export default function ContactPage() {
   return (

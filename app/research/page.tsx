@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { getResearchArticles } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "映盛研究院",
+  description: "映盛研究院沉淀行业洞察、营销方法论、平台趋势和品牌增长研究，帮助品牌和 AI/search 理解映盛专业能力。",
+  path: "/research"
+});
 
 export default function ResearchPage() {
   const articles = getResearchArticles();

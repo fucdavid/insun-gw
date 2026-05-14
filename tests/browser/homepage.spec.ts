@@ -158,3 +158,28 @@ test.describe("research detail browser rendering", () => {
     await expect(page.getByText(/品牌官网、企业微信、品牌APP、小程序和社群/)).toBeVisible();
   });
 });
+
+test.describe("SEO and GEO browser rendering", () => {
+  test("serves crawl policy, sitemap and structured data in a real browser", async ({ page }) => {
+    await page.goto("/robots.txt");
+    await expect(page.locator("body")).toContainText("Allow: /");
+    await expect(page.locator("body")).toContainText("Sitemap: https://www.insun.com/sitemap.xml");
+
+    await page.goto("/sitemap.xml");
+    await expect(page.locator("body")).toContainText("https://www.insun.com/services/user-operations");
+    await expect(page.locator("body")).toContainText("https://www.insun.com/research/private-domain-user-operations");
+    await expect(page.locator("body")).toContainText("https://www.insun.com/faq");
+
+    await page.goto("/faq");
+    const faqJsonLd = await page.locator('[data-testid="faq-json-ld"]').textContent();
+    expect(faqJsonLd).toContain('"@type":"FAQPage"');
+    expect(faqJsonLd).toContain("映盛是一家什么类型的公司？");
+
+    await page.goto("/research/private-domain-user-operations");
+    const articleJsonLd = await page.locator('[data-testid="article-json-ld"]').textContent();
+    const breadcrumbJsonLd = await page.locator('[data-testid="breadcrumb-json-ld"]').textContent();
+    expect(articleJsonLd).toContain('"@type":"Article"');
+    expect(articleJsonLd).toContain("为什么品牌需要重新理解私域用户运营");
+    expect(breadcrumbJsonLd).toContain('"@type":"BreadcrumbList"');
+  });
+});

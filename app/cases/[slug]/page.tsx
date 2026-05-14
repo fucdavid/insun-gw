@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBusinessCaseBySlug, getBusinessCases, getServiceBySlug } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata, JsonLd } from "@/lib/seo";
 
 type CaseDetailPageProps = {
   params: Promise<{
@@ -12,6 +13,21 @@ export function generateStaticParams() {
   return getBusinessCases().map((businessCase) => ({ slug: businessCase.slug }));
 }
 
+export async function generateMetadata({ params }: CaseDetailPageProps) {
+  const { slug } = await params;
+  const businessCase = getBusinessCaseBySlug(slug);
+
+  if (!businessCase) {
+    return {};
+  }
+
+  return createPageMetadata({
+    title: businessCase.title,
+    description: businessCase.summary,
+    path: `/cases/${businessCase.slug}`
+  });
+}
+
 export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
   const { slug } = await params;
   const businessCase = getBusinessCaseBySlug(slug);
@@ -21,9 +37,15 @@ export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
   }
 
   const relatedService = getServiceBySlug(businessCase.relatedServiceSlug);
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "首页", path: "/" },
+    { name: "服务案例", path: "/cases" },
+    { name: businessCase.title, path: `/cases/${businessCase.slug}` }
+  ]);
 
   return (
     <main className="bg-[#f7f7f4] pb-20 pt-28">
+      <JsonLd id="breadcrumb-json-ld" data={breadcrumb} />
       <section className="mx-auto max-w-7xl px-5">
         <p className="mb-4 text-sm font-medium text-[#0f5b4f]">服务案例</p>
         <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-normal text-[#1c1c1a]">

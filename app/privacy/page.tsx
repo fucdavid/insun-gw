@@ -1,3 +1,11 @@
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "隐私政策",
+  description: "映盛官网咨询表单的信息收集、使用、保存、更正和删除说明。",
+  path: "/privacy"
+});
+
 export default function PrivacyPage() {
   return (
     <main className="bg-[#f7f7f4] px-5 pb-20 pt-28 text-[#1c1c1a]">

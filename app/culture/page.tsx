@@ -1,3 +1,11 @@
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "映盛文化",
+  description: "映盛文化重视真实用户关系、专业交付、内容共创、数据复盘和团队长期成长。",
+  path: "/culture"
+});
+
 export default function CulturePage() {
   return (
     <main className="bg-[#f7f7f4] text-[#1c1c1a]">

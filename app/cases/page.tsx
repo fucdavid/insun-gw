@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { getBusinessCases, getServiceBySlug } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "服务案例",
+  description: "映盛服务案例展示用户运营、社会化媒体营销和数字渠道建设等项目如何帮助品牌沉淀增长能力。",
+  path: "/cases"
+});
 
 export default function CasesPage() {
   const cases = getBusinessCases();

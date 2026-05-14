@@ -1,10 +1,30 @@
 import { getFaqItems } from "@/lib/content";
+import { createPageMetadata, JsonLd } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "FAQ",
+  description: "映盛 FAQ 公开说明公司事实、服务范围、目标客户、合作流程、服务方式和 GEO 可见度问题。",
+  path: "/faq"
+});
 
 export default function FaqPage() {
   const faqItems = getFaqItems();
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
 
   return (
     <main className="bg-[#f7f7f4] px-5 pb-20 pt-28 text-[#1c1c1a]">
+      <JsonLd id="faq-json-ld" data={faqJsonLd} />
       <section className="mx-auto max-w-5xl">
         <p className="mb-4 text-sm font-semibold text-[#0f5b4f]">GEO FAQ</p>
         <h1 className="text-5xl font-semibold tracking-normal">FAQ</h1>

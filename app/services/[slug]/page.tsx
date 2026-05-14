@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { getClientLogoDataUri } from "@/lib/client-logo";
 import { getHomepageServices, getServiceBySlug } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata, JsonLd } from "@/lib/seo";
 
 type ServiceDetailPageProps = {
   params: Promise<{
@@ -18,6 +19,21 @@ export function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: ServiceDetailPageProps) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+
+  if (!service) {
+    return {};
+  }
+
+  return createPageMetadata({
+    title: service.title,
+    description: service.summary,
+    path: `/services/${service.slug}`
+  });
+}
+
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
@@ -27,9 +43,15 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
   }
 
   const modules = service.modules ?? service.keywords.map((keyword) => ({ name: keyword, description: service.summary }));
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "首页", path: "/" },
+    { name: "核心业务", path: "/services" },
+    { name: service.title, path: `/services/${service.slug}` }
+  ]);
 
   return (
     <main className="bg-[#f6f9fc] text-[#172033]">
+      <JsonLd id="breadcrumb-json-ld" data={breadcrumb} />
       <section className="relative overflow-hidden border-b border-[#dce6f2] px-5 pb-16 pt-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(39,135,245,0.22),transparent_34%),linear-gradient(115deg,#ffffff_0%,#edf6ff_56%,#d9ecff_100%)]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.88fr_1.12fr]">

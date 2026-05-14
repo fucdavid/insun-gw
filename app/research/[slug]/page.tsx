@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getResearchArticleBySlug, getResearchArticles } from "@/lib/content";
+import { breadcrumbJsonLd, createPageMetadata, JsonLd, siteName, siteUrl } from "@/lib/seo";
 
 type ResearchArticlePageProps = {
   params: Promise<{
@@ -12,6 +13,21 @@ export function generateStaticParams() {
   return getResearchArticles().map((article) => ({ slug: article.slug }));
 }
 
+export async function generateMetadata({ params }: ResearchArticlePageProps) {
+  const { slug } = await params;
+  const article = getResearchArticleBySlug(slug);
+
+  if (!article) {
+    return {};
+  }
+
+  return createPageMetadata({
+    title: article.title,
+    description: article.summary,
+    path: `/research/${article.slug}`
+  });
+}
+
 export default async function ResearchArticlePage({ params }: ResearchArticlePageProps) {
   const { slug } = await params;
   const article = getResearchArticleBySlug(slug);
@@ -20,8 +36,34 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
     notFound();
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.summary,
+    datePublished: article.publishedAt,
+    dateModified: article.publishedAt,
+    author: {
+      "@type": "Organization",
+      name: "映盛研究院"
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteName
+    },
+    mainEntityOfPage: `${siteUrl}/research/${article.slug}`,
+    articleSection: article.category
+  };
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "首页", path: "/" },
+    { name: "映盛研究院", path: "/research" },
+    { name: article.title, path: `/research/${article.slug}` }
+  ]);
+
   return (
     <main className="bg-[#f7f7f4] px-5 pb-20 pt-28 text-[#1c1c1a]">
+      <JsonLd id="article-json-ld" data={articleJsonLd} />
+      <JsonLd id="breadcrumb-json-ld" data={breadcrumb} />
       <article className="mx-auto max-w-5xl">
         <header className="border border-black/10 bg-white p-7 shadow-sm md:p-9">
           <Link href="/research" className="text-sm font-medium text-[#0f5b4f]">
